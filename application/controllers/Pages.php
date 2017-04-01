@@ -2,10 +2,8 @@
 
 class Pages extends CI_Controller {
 
-    public function index($page = 'home') {// Index page is default.. pulls what ever page that is defined in views/pages
-        printf();
-        if (!file_exists(APPPATH . '/views/pages/' . $page . '.php')) { // if the page does not exist, go to home
-               printf('dead body here');
+    public function index($page = 'xxx') {// Index page is default.. pulls what ever page that is defined in views/pages
+        if (!file_exists(APPPATH . '/views/pages/' . $page . '.php')) { // if the page does not exist, go to home               
             $page = 'home';
         }
         if ($page == 'logout') {
@@ -19,7 +17,7 @@ class Pages extends CI_Controller {
         $data['points_view'] = $this->load->view('templates/points_view', $data, TRUE); // gets the points table view
         $data['update'] = $this->model_messages->get_message();     // gets the message
 
-
+        date_default_timezone_set('America/Denver');
         $this->load->view('templates/header', $data);
         $this->load->view('pages/' . $page, $data);
         $this->load->view('templates/footer', $data);

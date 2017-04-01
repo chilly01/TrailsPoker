@@ -2,7 +2,7 @@
 <style>
     body{
         background-color: black;
-        background-image: url("<?= base_url().'assets/';?>images/trails_small_bg.jpg");
+        background-image: url("<?= $this->config->item('image_url').'assets/';?>images/trails_small_bg.jpg");
         background-repeat: no-repeat;
         background-position: right top;
         background-attachment: fixed;
@@ -30,7 +30,7 @@
 
 h2 { 
    position: absolute; 
-   top: 70px; 
+   top: 270px; 
    left: 0; 
    width: 100%; 
 }
@@ -84,8 +84,8 @@ h2 span {
     <div id="full_site">
     <div id="header_main">
         <div id="header_upper" class="image"> 
-			<h2><span>November 6, 2016</span></h2>		
-			<img src="<?= base_url().'assets/' ?>images/cadence_poker.jpg" class="img-rounded img-responsive" alt="Cadence Poker" > 
+			<h2><span><?= date("Y/m/d"); ?> </span></h2>		
+			<img src="<?= $this->config->item('image_url').'assets/' ?>images/tp_logo.jpg" class="img-rounded img-responsive" alt="Cadence Poker" > 
 		</div>            
         
     </div>
