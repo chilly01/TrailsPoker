@@ -72,7 +72,8 @@ h2 span {
     }
  
 </style>
-<?php 
+<?php
+date_default_timezone_set('America/Denver');
  if  ($this->session->active){ ?>
            </br>
            </br>

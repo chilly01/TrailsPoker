@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 12, 2017, 9:12:35 AM
+    Author     : Cody Hillyard
+*/
+
+body {
+      position: relative; 
+  }
+  
+#image_header {
+    background-color: #263d36;
+    background-image: url(background.jpg);
+    background-position: center top;
+    background-size: cover;
+	height: 700px; 
+}
+#home {padding-top:50px;height:500px;color: black; background-color: #ffffcc;}
+
+#resume {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
+
+#projects {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
+
+#blog {padding-top:50px;height:500px;color: #fff; background-color: #00bcd4;}

@@ -1,4 +1,4 @@
-<em>&copy; 2015</em>
+<em>&copy; 2017 codyhillyard.com</em>
 <a href="<?= site_url() ?>">Main Page</a>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
