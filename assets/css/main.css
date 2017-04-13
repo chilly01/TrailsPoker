@@ -12,12 +12,29 @@ body {
       position: relative; 
   }
   
-#image_header {
-    background-color: #263d36;
+  .ch_msg {
+      padding: 10px; 
+      float: left; 
+      width: 75%; 
+  }
+  
+  .ch_act {
+      padding: 10px; 
+      float: right; 
+      width: 25%; 
+  }
+  
+  #background_container {
+      background-color: #263d36;
     background-image: url(background.jpg);
     background-position: center top;
     background-size: cover;
-	height: 700px; 
+
+      
+  }
+  
+#image_header {
+    	height: 70px; 
 }
 #home {padding-top:50px;height:500px;color: black; background-color: #ffffcc;}
 
