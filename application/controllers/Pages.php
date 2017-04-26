@@ -3,6 +3,7 @@
 class Pages extends CI_Controller {
 
     public function index($page = 'null') {// Index page is default.. pulls what ever page that is defined in views/pages
+        
         if (!file_exists(APPPATH . '/views/pages/' . $page . '.php')) { // if the page does not exist, go to home               
             $page = 'main';
         }
@@ -51,35 +52,24 @@ class Pages extends CI_Controller {
     }
 
     public function admin($action = 'home') {
-
-        if ($this->session->active) {
-            $this->load->database();
-            if (!file_exists(APPPATH . '/views/admin/' . $action . '.php')) {
-                $action = 'home';
-            }
-
-            $data['update'] = ' ';
-
-            if ($action == "update_message") {
-                $this->load->model('model_messages');
-                $data['last_message'] = $this->model_messages->get_message();
-            }
-
-            if ($action == "new_event") {
-
-                $this->load->model('model_players');
-                $data['players'] = $this->model_players->get_players();
-                asort($data['players']);
-                $data['players']['0'] = "Add New Player";
-            }
-
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('admin/' . $action, $data);
-            $this->load->view('templates/footer', $data);
-        } else {
-            $this->index('login');
+        $this->is_active(); 
+        if (!file_exists(APPPATH . '/views/admin/' . $action . '.php')) {
+            $action = 'home';
         }
+        $data['update'] = ' ';
+        if ($action == "update_message") {
+            $this->load->model('model_messages');
+            $data['last_message'] = $this->model_messages->get_message();
+        }
+        if ($action == "new_event") {
+            $this->load->model('model_players');
+            $data['players'] = $this->model_players->get_players();
+            asort($data['players']);
+            $data['players']['0'] = "Add New Player";
+        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('admin/' . $action, $data);
+        $this->load->view('templates/footer', $data);
     }
 
     public function create_new_event() {
@@ -93,30 +83,9 @@ class Pages extends CI_Controller {
         $event['notes'] = $this->input->post('Event_notes');
         $event_id = $this->model_events->set_event($event);
 
-        for ($x = 1; $x <= 10; $x++) {
-            $val = $this->input->post("players_" . $x);
-            if ($val == 0) {
-                $name = "name_" . $x;
-                $val = $this->model_players->create_player($this->input->post($name));
-            }
-            $this->model_points->create_point_award($event_id, $val, $x, 11 - $x);
-        }
-
-        for ($s = 1; $s <= 3; $s++) {
-            $active_side = $this->input->post('side_' . $s);
-            if (isset($active_side)) {
-                $player_id = $this->input->post("players_s" . $s);
-                if ($player_id == 0) {
-                    $name = "name_s" . $s;
-                    $player_id = $this->model_players->create_player($this->input->post($name));
-                }
-                $this->model_points->create_point_award($event_id, $player_id, '*', 3);
-                echo $s;
-            }
-        }
-
-
-
+        $this->set_player_points($event_id);
+        $this->set_side_points($event_id); 
+        
         $data['update'] = "Event #" . $event_id;
 
         $this->load->view('templates/header', $data);
@@ -139,7 +108,6 @@ class Pages extends CI_Controller {
     }
 
     private function is_active() {
-        date_default_timezone_set('America/Denver');
         if (!$this->session->active) {
             echo "<h1>inactive session</h1>";
             echo '<a href="' . site_url() . '">Main Page</a></br></br>';
@@ -150,26 +118,17 @@ class Pages extends CI_Controller {
     
     private function set_player_points($event_id){
         for ($x = 1; $x <= 10; $x++) {
-            $val = $this->input->post("players_" . $x);
-            if ($val == 0) {
-                $name = "name_" . $x;
-                $val = $this->model_players->create_player($this->input->post($name));
-            }
-            $this->model_points->create_point_award($event_id, $val, $x, 11 - $x);
+            $player_id = ($this->input->post("players_" . $x)) ? :  $player_id = $this->create_player("name_" . $x);           
+            $this->model_points->create_point_award($event_id, $player_id, $x, 11 - $x);
         }
     }
     
     private function set_side_points($event_id){
           for ($s = 1; $s <= 3; $s++) {
-            $active_side = $this->input->post('side_' . $s);
-            if (isset($active_side)) {
-                $player_id = $this->input->post("players_s" . $s);
-                if ($player_id == 0) {
-                    $name = "name_s" . $s;
-                    $player_id = $this->model_players->create_player($this->input->post($name));
-                }
-                $this->model_points->create_point_award($event_id, $player_id, '*', 3);
-                echo $s;
+              $checkbox = $this->input->post('side_' . $s);
+            if (isset($checkbox)) {
+                $player_id = ($this->input->post("players_s" . $s)) ? : $this->create_player("name_s" . $s);               
+                $this->model_points->create_point_award($event_id, $player_id, '*', 3);               
             }
         }
     }
