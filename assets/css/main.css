@@ -25,8 +25,7 @@ body {
   }
   
   #background_container {
-      background-color: #263d36;
-    background-image: url(background.jpg);
+    background-color: grey;
     background-position: center top;
     background-size: cover;
 
@@ -36,10 +35,10 @@ body {
 #image_header {
     	height: 70px; 
 }
-#home {padding-top:50px;height:500px;color: black; background-color: #ffffcc;}
+#home {padding-top:50px;height:500px;color: black; background-color: #ffffcc; margin-bottom: 50px; border-radius: 5px;}
 
-#resume {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
+#resume {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;margin-bottom: 50px; border-radius: 5px;}
 
-#projects {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
+#projects {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;margin-bottom: 50px; border-radius: 5px;}
 
-#blog {padding-top:50px;height:500px;color: #fff; background-color: #00bcd4;}
+#blog {padding-top:50px;height:500px;color: #fff; background-color: #00bcd4;margin-bottom: 50px; border-radius: 5px;}

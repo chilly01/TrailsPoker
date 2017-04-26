@@ -126,7 +126,6 @@ class Pages extends CI_Controller {
 
     public function player($id = '0') {
 
-        $page = 'home';
         $this->load->model('model_messages');
         $this->load->model('model_players');
 
@@ -140,6 +139,7 @@ class Pages extends CI_Controller {
     }
 
     private function is_active() {
+        date_default_timezone_set('America/Denver');
         if (!$this->session->active) {
             echo "<h1>inactive session</h1>";
             echo '<a href="' . site_url() . '">Main Page</a></br></br>';
@@ -147,5 +147,36 @@ class Pages extends CI_Controller {
             exit;
         }
     }
+    
+    private function set_player_points($event_id){
+        for ($x = 1; $x <= 10; $x++) {
+            $val = $this->input->post("players_" . $x);
+            if ($val == 0) {
+                $name = "name_" . $x;
+                $val = $this->model_players->create_player($this->input->post($name));
+            }
+            $this->model_points->create_point_award($event_id, $val, $x, 11 - $x);
+        }
+    }
+    
+    private function set_side_points($event_id){
+          for ($s = 1; $s <= 3; $s++) {
+            $active_side = $this->input->post('side_' . $s);
+            if (isset($active_side)) {
+                $player_id = $this->input->post("players_s" . $s);
+                if ($player_id == 0) {
+                    $name = "name_s" . $s;
+                    $player_id = $this->model_players->create_player($this->input->post($name));
+                }
+                $this->model_points->create_point_award($event_id, $player_id, '*', 3);
+                echo $s;
+            }
+        }
+    }
+    
+    private function create_player($post_id){
+        return $this->model_players->create_player($this->input->post($post_id));
+    }
+    
 
 }
