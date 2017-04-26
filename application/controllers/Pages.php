@@ -2,25 +2,12 @@
 
 class Pages extends CI_Controller {
 
-    public function index($page = 'null') {// Index page is default.. pulls what ever page that is defined in views/pages
-        
-        if (!file_exists(APPPATH . '/views/pages/' . $page . '.php')) { // if the page does not exist, go to home               
-            $page = 'main';
-        }
-        if ($page == 'logout') {
-            $this->session->sess_destroy(); // logout destorys session
-        }
-
-        $this->load->model('model_messages'); // load message model
-        $this->load->model('model_points'); // load points model
-
-        $data['points'] = $this->model_points->get_all_points();  // gets current point totals 
-        $data['points_view'] = $this->load->view('templates/points_view', $data, TRUE); // gets the points table view
-        $data['update'] = $this->model_messages->get_message();     // gets the message
-
-        
+    public function index($page = 'null') {// Index page is default.. pulls what ever page that is defined in views/pages        
+        $action = (file_exists(APPPATH . '/views/pages/' . $page . '.php')) ? $page : 'home';         
+        $action == 'logout' ? $this->session->sess_destroy() : NULL; // logout destorys session                
+        $data = $this->get_home_data();          
         $this->load->view('templates/header', $data);
-        $this->load->view('pages/' . $page, $data);
+        $this->load->view('pages/' . $action, $data);
         $this->load->view('templates/footer', $data);
     }
 
@@ -45,18 +32,15 @@ class Pages extends CI_Controller {
         $data['message_id'] = $this->model_messages->set_message($data['message']);  // set the message, get the new id
         $data['update'] = "Message (" . $data['message_id'] . ") changed to: <p>" . $data['message'] . "</p>";   // message changed message      
 
-
         $this->load->view('templates/header', $data);
         $this->load->view('admin/home', $data);
         $this->load->view('templates/footer', $data);
     }
 
-    public function admin($action = 'home') {
+    public function admin($page = 'home') {
         $this->is_active(); 
-        if (!file_exists(APPPATH . '/views/admin/' . $action . '.php')) {
-            $action = 'home';
-        }
         $data['update'] = ' ';
+        $action = (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) ? $page : 'home'; 
         if ($action == "update_message") {
             $this->load->model('model_messages');
             $data['last_message'] = $this->model_messages->get_message();
@@ -73,21 +57,14 @@ class Pages extends CI_Controller {
     }
 
     public function create_new_event() {
-        $this->is_active();
+        $this->is_active();        
         $this->load->model('model_events');
         $this->load->model('model_players');
         $this->load->model('model_points');
-
-        $event['name'] = $this->input->post('Event_name');
-        $event['date'] = $this->input->post('Event_date');
-        $event['notes'] = $this->input->post('Event_notes');
-        $event_id = $this->model_events->set_event($event);
-
+        $event_id = $this->init_event(); 
         $this->set_player_points($event_id);
-        $this->set_side_points($event_id); 
-        
+        $this->set_side_points($event_id);         
         $data['update'] = "Event #" . $event_id;
-
         $this->load->view('templates/header', $data);
         $this->load->view('admin/home', $data);
         $this->load->view('templates/footer', $data);
@@ -135,6 +112,24 @@ class Pages extends CI_Controller {
     
     private function create_player($post_id){
         return $this->model_players->create_player($this->input->post($post_id));
+    }
+    
+    private function get_home_data(){
+        $this->load->model('model_messages'); // load message model
+        $this->load->model('model_points'); // load points model
+
+        $data['points'] = $this->model_points->get_all_points();  // gets current point totals 
+        $data['points_view'] = $this->load->view('templates/points_view', $data, TRUE); // gets the points table view
+        $data['update'] = $this->model_messages->get_message();     // gets the message
+        return $data; 
+    }
+    
+    private function init_event(){
+        $event['name'] = $this->input->post('Event_name');
+        $event['date'] = $this->input->post('Event_date');
+        $event['notes'] = $this->input->post('Event_notes');
+        $event_id = $this->model_events->set_event($event);
+        return $event_id; 
     }
     
 
