@@ -3,6 +3,7 @@
 class Pages extends CI_Controller {
 
     public function index($page = 'null') {// Index page is default.. pulls what ever page that is defined in views/pages        
+        $this->set_trail();
         $action = (file_exists(APPPATH . '/views/pages/' . $page . '.php')) ? $page : 'home';         
         $action == 'logout' ? $this->session->sess_destroy() : NULL; // logout destorys session                
         $data = $this->get_home_data();          
@@ -38,6 +39,7 @@ class Pages extends CI_Controller {
     }
 
     public function admin($page = 'home') {
+        $this->set_trail();
         $this->is_active(); 
         $data['update'] = ' ';
         $action = (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) ? $page : 'home'; 
@@ -71,7 +73,7 @@ class Pages extends CI_Controller {
     }
 
     public function player($id = '0') {
-
+        $this->set_trail();
         $this->load->model('model_messages');
         $this->load->model('model_players');
 
@@ -131,6 +133,13 @@ class Pages extends CI_Controller {
         $event_id = $this->model_events->set_event($event);
         return $event_id; 
     }
+    
+    private function set_trail(){
+        $this->load->model('model_trails'); 
+        $this->model_trails->make_trail(); 
+    }
+    
+    
     
 
 }
