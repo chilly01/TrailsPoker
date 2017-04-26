@@ -8,9 +8,14 @@ class Model_trails extends CI_Model{
     }
     
     function make_trail(){
-        $info = $this->ip(); 
-        echo $info; 
-        $sql = "INSERT INTO trails (info) VALUES (".$this->db->escape($info).")";
+        error_reporting(-1); 
+        $info = $this->ip_details($this->get_ip());
+        
+        $customer_ip = isset($info->ip) ?  $info->ip : 'unknown_ip'; 
+        $customer_city = isset($info->city) ?  $info->city : 'unknown_city'; 
+        $customer_country =  isset($info->country) ?  $info->country : 'unknown_country'; 
+        
+        $sql = "INSERT INTO trails (info) VALUES (". $this->db->escape($customer_ip . " , " .$customer_city. " , " .$customer_country) .")";
         if ($this->db->query($sql)) {
             return $this->db->insert_id();
         } 
@@ -19,7 +24,7 @@ class Model_trails extends CI_Model{
         }
     }
     
-    private function ip(){
+    private function get_ip(){
         $ipaddress = '';
         if (isset($_SERVER['HTTP_CLIENT_IP']))
             $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
@@ -37,4 +42,10 @@ class Model_trails extends CI_Model{
             $ipaddress = 'UNKNOWN';
         return $ipaddress ;
      }
+     
+    private function ip_details($ip) {
+        $json = file_get_contents("http://ipinfo.io/{$ip}/geo");
+        $details = json_decode($json); // HERE!!!
+        return $details;
+    }
 } 

@@ -1,31 +1,36 @@
 
 <style>
-    body{
-        background-color: black;
-        background-image: url("<?= $this->config->item('image_url').'assets/';?>images/trails_small_bg.jpg");
-        background-repeat: no-repeat;
-        background-position: right top;
-        background-attachment: fixed;
-    }
+body{
+    background-color: black;
+    background-image: url("<?= $this->config->item('image_url').'assets/';?>images/trails_small_bg.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+}
+
+#full_site{
+    width: 1100px;
+    margin: auto;
+}
+
+#header_main{
+    height: 400px; 
+}
+
+#header_upper{
+    background-color: slategrey; 
+}
     
-    
-    #full_site{
-        width: 1100px;
-        margin: auto;
-    }
-    #header_main{
-        height: 750px; 
-    }
-    
-    #header_name{
-        color : hotpink;
-        font-family: serif;         
-        text-transform: uppercase;
-        font-size: 500%
-    }
-	.image { 
-   position: relative; 
-   width: 100%; /* for IE 6 */
+#header_name{
+    color : hotpink;
+    font-family: serif;         
+    text-transform: uppercase;
+    font-size: 500%
+}
+
+.image { 
+    position: relative; 
+    width: 100%; /* for IE 6 */
 }
 
 h2 { 
@@ -87,7 +92,7 @@ date_default_timezone_set('America/Denver');?>
     <div id="header_main">
         <div id="header_upper" class="image"> 
 			<h2><span><?= date("Y/m/d"); ?> </span></h2>		
-			<img src="<?= $this->config->item('image_url').'assets/' ?>images/tp_logo.jpg" class="img-rounded img-responsive" alt="Cadence Poker" > 
+			<img src="<?= $this->config->item('image_url').'assets/' ?>images/fullname1.png" class="img-rounded img-responsive" alt="codyhillyard.com" > 
 		</div>            
         
     </div>
