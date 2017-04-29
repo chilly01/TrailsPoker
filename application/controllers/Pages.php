@@ -4,7 +4,7 @@ class Pages extends CI_Controller {
 
     public function index($page = 'null') {// Index page is default.. pulls what ever page that is defined in views/pages        
         $this->set_trail();
-        $action = (file_exists(APPPATH . '/views/pages/' . $page . '.php')) ? $page : 'home';         
+        $action = (file_exists(APPPATH . '/views/pages/' . $page . '.php')) ? $page : 'main';         
         $action == 'logout' ? $this->session->sess_destroy() : NULL; // logout destorys session                
         $data = $this->get_home_data();          
         $this->load->view('templates/header', $data);
@@ -39,10 +39,9 @@ class Pages extends CI_Controller {
     }
 
     public function admin($page = 'home') {
-        $this->set_trail();
         $this->is_active(); 
         $data['update'] = ' ';
-        $action = (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) ? $page : 'home'; 
+        $action = (file_exists(APPPATH . '/views/admin/' . $page . '.php')) ? $page : 'home'; 
         if ($action == "update_message") {
             $this->load->model('model_messages');
             $data['last_message'] = $this->model_messages->get_message();
@@ -53,6 +52,11 @@ class Pages extends CI_Controller {
             asort($data['players']);
             $data['players']['0'] = "Add New Player";
         }
+        if ($action == "history"){
+            $this->load->model('model_trails'); 
+            $data['history'] = $this->model_trails->get_history(); 
+        }
+        
         $this->load->view('templates/header', $data);
         $this->load->view('admin/' . $action, $data);
         $this->load->view('templates/footer', $data);

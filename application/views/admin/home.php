@@ -14,7 +14,9 @@
 </br>
 </br>
 <a href="<?= site_url('pages/admin/new_event') ?>">Add Event</a>
-
+</br></br>
+<a href="<?= site_url('pages/admin/history') ?>">History</a>
 </br>
-<div>todo: event new, event edit, logout.</div>
+</br>
+
 

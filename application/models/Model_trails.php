@@ -24,6 +24,19 @@ class Model_trails extends CI_Model{
         }
     }
     
+    function get_history(){
+       $data = []; 
+        
+        $query = $this->db->query("select * from trails order by date desc;"); 
+        if ($query->num_rows() > 0)
+        {
+           foreach ($query->result() as $row){
+              $data[$row->id] = [$row->info, $row->date];
+           }           
+        }
+        return $data; 
+    }
+    
     private function get_ip(){
         $ipaddress = '';
         if (isset($_SERVER['HTTP_CLIENT_IP']))

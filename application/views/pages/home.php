@@ -86,6 +86,9 @@ h2 span {
 <a href="<?= site_url('pages/index/logout') ?>">LOGOUT</a>
           
 <?php }
+else {?>
+    <a href="<?= site_url('pages/index/login') ?>">LOGIN</a>
+<?php }
 date_default_timezone_set('America/Denver');?>
 <div id="main_body" class="container-fluid">
     <div id="full_site">
