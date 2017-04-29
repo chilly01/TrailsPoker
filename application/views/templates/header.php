@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="<?= $this->config->item('image_url').'assets/' ?>css/main.css">
 <link rel="stylesheet" href="<?= $this->config->item('image_url').'assets/' ?>font-awesome/css/font-awesome.min.css">
 <head>
-                <title>Cody fdss</title>
+                <title>codyhillyard.com</title>
         </head>
         	<body data-spy="scroll" data-target=".navbar" data-offset="50">	
                     

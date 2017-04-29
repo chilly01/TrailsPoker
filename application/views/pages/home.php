@@ -78,7 +78,7 @@ h2 span {
  
 </style>
 
-date_default_timezone_set('America/Denver');?>
+<?php date_default_timezone_set('America/Denver');?>
 <div id="main_body" class="container-fluid">
     <div id="full_site">
     <div id="header_main">
