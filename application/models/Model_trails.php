@@ -27,7 +27,7 @@ class Model_trails extends CI_Model{
     function get_history(){
        $data = []; 
         
-        $query = $this->db->query("select * from trails order by date desc;"); 
+        $query = $this->db->query("SELECT id, info, MAX(date) AS date FROM trails GROUP BY info ORDER BY date DESC;"); 
         if ($query->num_rows() > 0)
         {
            foreach ($query->result() as $row){
