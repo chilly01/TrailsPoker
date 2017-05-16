@@ -27,8 +27,10 @@
                     <div class="col-sm-8 text-left">
                     <div id="home">
                      <div class="ch_msg">
+                         <img src="<?= $this->config->item('image_url').'assets/images/';?>lucky_small.png"/>
+
 				<h1>Cody Hillyard</h1>
-				<p>Born and raised in Logan Utah.  I spent my childhood learning how to do as many things that I could</p>
+				<p>Born and raised in Logan Utah.</p>
                     </div>
 			<div class="ch_act">
                             <div class='list-group'>
@@ -36,7 +38,6 @@
                                 <a href='https://twitter.com/chillyard' target="_blank" class='list-group-item'><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a>
                                 <a data-toggle="modal" data-target="#myModal" class='list-group-item'><i class="fa fa-envelope-open" aria-hidden="true"></i> Email</a>
                             </div>
-			<span>This is place holder for the social media links</span>
 		</div>
 		</div>
 		<div id="resume" >
@@ -45,7 +46,7 @@
 				<p>This is a test of the programming and web site building skills you have</p>
 			</div>
 			<div class="ch_act">
-			<span>This is place holder for the social media links</span>
+			
 		</div>
 		</div>
 		
@@ -56,7 +57,7 @@
 				<p>This is a test of the programming and web site building skills you have</p>
 			</div>
 			<div class="ch_act">
-			<span>This is place holder for the social media links</span>
+			
 		</div>
 		</div>
 		
@@ -66,7 +67,7 @@
 				<p>This is a test of the programming and web site building skills you have</p>
 			</div>
 			<div class="ch_act">
-			<span>This is place holder for the social media links</span>
+			
 		</div>
 		</div>
             </div>
