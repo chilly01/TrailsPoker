@@ -12,6 +12,7 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="#home">Home</a></li>				
+				<li><a href="#store">Store</a></li>			
 				<li><a href="#resume">Resume</a></li>
 				<li><a href="#blog">Blog</a></li>
 				<li><a href="#projects">Projects</a></li>
@@ -36,15 +37,70 @@
                             <div class='list-group'>
                                 <a href='https://www.facebook.com/cody.hillyard' target="_blank" class='list-group-item'><i class="fa fa-facebook-square" aria-hidden="true"></i> Facebook</a>
                                 <a href='https://twitter.com/chillyard' target="_blank" class='list-group-item'><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a>
+                                <a href='https://github.com/chilly01' target="_blank" class='list-group-item'><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a>
                                 <a data-toggle="modal" data-target="#myModal" class='list-group-item'><i class="fa fa-envelope-open" aria-hidden="true"></i> Email</a>
                             </div>
 		</div>
 		</div>
-		<div id="resume" >
+		<div id="store" >
+			<div class="ch_msg">
+				<h1>Things I'm trying to sell</h1>
+				<p>please browse through the items I have listed here and contact me if you want to buy any of them</p>
+			</div>
+			<div class="ch_act">
+                        <div id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="card">
+    <div class="card-header" role="tab" id="headingOne">
+      <h5 class="mb-0">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Collapsible Group Item #1
+        </a>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="card-block">
+          <p> this is my test </p>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTwo">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="card-block">
+          <p>Placeholder for ps_3 games</p>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingThree">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </a>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="card-block">
+          <p>Placeholer for other things to sell</p> </div>
+    </div>
+  </div>
+</div>
+			
+		</div>
+		</div>
+                        
+                <div id="resume" >
 			<div class="ch_msg">
 				<h1> Cody Hillyard</h1>
 				<p>This is a test of the programming and web site building skills you have</p>
-			</div>
+			</div>                   
 			<div class="ch_act">
 			
 		</div>
