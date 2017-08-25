@@ -35,6 +35,7 @@
                     </div>
 			<div class="ch_act">
                             <div class='list-group'>
+                                <a href='https://www.linkedin.com/in/cody-hillyard' target="_blank" class='list-group-item'><i class="fa fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a>
                                 <a href='https://www.facebook.com/cody.hillyard' target="_blank" class='list-group-item'><i class="fa fa-facebook-square" aria-hidden="true"></i> Facebook</a>
                                 <a href='https://twitter.com/chillyard' target="_blank" class='list-group-item'><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a>
                                 <a href='https://github.com/chilly01' target="_blank" class='list-group-item'><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a>
