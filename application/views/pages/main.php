@@ -120,8 +120,14 @@
 		
 		<div id="projects">
 			<div class="ch_msg">
+                            <div id="react_box"></div>
+                            <script src="https://unpkg.com/react@15/dist/react.js"></script>
+                            <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+                            <script src="<?= $this->config->item('image_url').'assets/' ?>react/tictactoe.js"></script>
+                            <link rel="stylesheet" href="<?= $this->config->item('image_url').'assets/' ?>react/index.css">
+               
 				<h1 > Cody Hillyard</h1>
-				<p>This is a test of the programming and web site building skills you have</p>
+				<p>Tic Tac Toe in ReactJS</p>
 			</div>
 			<div class="ch_act">
 			
