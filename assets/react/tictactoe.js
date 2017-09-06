@@ -113,10 +113,10 @@ var Board = function (_React$Component) {
           React.createElement('br', null),
           React.createElement(
             'button',
-            { className: 'btn', onClick: function onClick() {
+            { className: 'btn btn-primary', onClick: function onClick() {
                 _this3.resetGame();
               } },
-            'reset'
+            'Reset'
           )
         )
       );
