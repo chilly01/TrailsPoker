@@ -10,11 +10,19 @@ class Card {
         $this->suit = $suit;
         $this->value = $value;
     }
+    
+    function is_bigger($card){
+        if ($card->value === $this->value){
+            return ($this->suit > $card->suit); 
+        }
+        return ($this->value > $card->value); 
+    }
 }
 
 class Table {
    
     public $player; // array of array of 2 cards
+    public $best_hand_for_player; // array of hand rank and value per player
     public $player_count = 0; 
     
     public $community; 
@@ -161,20 +169,57 @@ class Table {
             $suit_info = $this->sort_by_suits($hand); 
             $match_info = $this->sort_matches($hand); 
             $straight_info =$this->sort_straights($hand); 
-            $sf = $this->detect_straight_flush($suit_info); 
+            $this->best_hand_for_player[$pv] = $this->find_best_hand($hand, $suit_info, $straight_info, $match_info); 
             
-            
-            echo json_encode($straight_info) . " <br/><br/><br/>" . json_encode($sf) . " <br/><br/><br/>" . json_encode($match_info) . " --- Player" . $pv++ ."--- <br/> <br/>";
+            echo "<div> Player" . $pv ." --- <p>straight_info: ". json_encode($straight_info) . "</p><br/>"; 
+            echo "Suit Info: <br/>"; 
+            foreach ($suit_info as $sinfo){
+                echo json_encode($sinfo) . " <br/>"; 
+            }
+            echo "<p> Match Info: ". json_encode($match_info) . "</p> Player" . $pv++ ."---  <br/></div><br/>";
         } 
     }
     
+    function find_best_hand($hand, $suit_info, $straight_info, $match_info){
+        $is_straight_flush = $this->detect_straight_flush($suit_info); 
+        if ($is_straight_flush[0]){
+            return ['straight-flush', $is_straight_flush[1], $is_straight_flush['suit']]; 
+        }
+        $is_four_of_a_kind = $this->detect_four_of_a_kind($match_info); 
+        if ($is_four_of_a_kind){
+            foreach($match_info as $key=>$value){
+                if ($value > 3){
+                    return ['four-of-a-kind', $key]; 
+                }
+            }
+        
+        }
+        $is_full_house = $this->detect_full_house($match_info); 
+        if ($is_full_house)
+        {
+            return ['full-house',$is_full_house]; // value of the triple , // value of the pair ]
+        }
+        
+        
+        
+        return 'not done'; 
+    }
+    
+    
+    
+    
+    
     function detect_straight_flush($hand_by_suits){
+        $suit_counter = 0; 
         foreach ($hand_by_suits as $suit){
             if (count($suit)>4){
-                return $this->sort_straights($suit); 
+                $value = $this->sort_straights($suit);
+                $value['suit'] = $this->suits[$suit_counter];
+                return $value; 
             }
+            $suit_counter++; 
         }
-        return false; 
+        return [false]; 
     }
     
     function detect_four_of_a_kind($matches){        
@@ -207,11 +252,28 @@ class Table {
 class API extends CI_Controller {
     
        public function poker($player_count){
-        if (is_numeric($player_count)){                  
+        if (is_numeric($player_count) && (1 < $player_count && $player_count < 12 )){                  
             $table = new Table($player_count); 
             echo json_encode($table); 
             } else {
-                 echo "Invalid Player Count"; 
+                 echo "Invalid Player Count <br/><br/>"; 
+                 
+                 $table = new Table(2); 
+                 echo "<p>". json_encode($table) . "<p/>"; 
+                  
+                 
+                 $hand = [new Card('Ten', 'spades' , 8), 
+                     new Card('Ten', 'diamonds' , 8), 
+                     new Card('Queen', 'diamonds' , 10), 
+                     new Card('Ace', 'clubs' , 12), 
+                     new Card( 'Ace', 'spades' , 12), 
+                     new Card('Eight', 'diamonds' , 6), 
+                     new Card('Ace', 'hearts' , 12) ]; 
+                $suit_info = $table->sort_by_suits($hand); 
+                $straight_info = $table->sort_straights($hand);  
+                $match_info = $table->sort_matches($hand);                  
+                 
+                 echo json_encode($table->find_best_hand($hand, $suit_info, $straight_info, $match_info)); 
             } 
     }
 }
