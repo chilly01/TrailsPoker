@@ -105,7 +105,13 @@ class Table {
     function sort_matches($hand){
         $paired = 1; 
         $cc = 0; 
-        $known = array(); 
+        $known = []; 
+        $temp = [];        
+        $result = [
+            "pairs" => [], 
+            "trips" => [],
+            "quads" => []
+        ]; 
        
         foreach($hand as $card){            
             if (array_key_exists($card->name, $known)){
@@ -120,9 +126,24 @@ class Table {
             }
             $cc++;             
             if ($paired > 1){
-            $known[$card->name]=$paired; 
+                $known[$card->name]=$paired; 
+                switch ($paired){
+                    case 2:
+                        $result['paired'][] = $temp;  
+                        break; 
+                    case 3: 
+                        $result['paired'][] = $temp; 
+                        break; 
+                    case 4:
+                        $result['paired'][] = $temp; 
+                        break;
+                    default:
+                        break; 
+                 }                             
+                
             }
             $paired = 1; 
+            $temp = []; 
         }
         
         return $known;         
