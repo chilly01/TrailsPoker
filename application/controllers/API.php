@@ -119,8 +119,10 @@ class Table {
                 continue; 
             }
             $val = $card->name;
+            $temp[] = $card; 
             for ($x = $cc + 1; $x < 7; $x++){
                 if ($val == $hand[$x]->name){
+                    $temp[] = $hand[$x]; 
                     $paired++; 
                 }
             }
@@ -129,13 +131,13 @@ class Table {
                 $known[$card->name]=$paired; 
                 switch ($paired){
                     case 2:
-                        $result['paired'][] = $temp;  
+                        $result['pairs'][] = $temp;  
                         break; 
                     case 3: 
-                        $result['paired'][] = $temp; 
+                        $result['trips'][] = $temp; 
                         break; 
                     case 4:
-                        $result['paired'][] = $temp; 
+                        $result['quads'][] = $temp; 
                         break;
                     default:
                         break; 
@@ -145,8 +147,7 @@ class Table {
             $paired = 1; 
             $temp = []; 
         }
-        
-        return $known;         
+        return $result;         
     }
     
     function sort_straights($hand){
@@ -155,29 +156,29 @@ class Table {
             $has[$x]=false; 
         }
         foreach($hand as $card){
-            $has[$card->value] = true; 
+            $has[$card->value] = $card; 
         }   
         
           if ($has[8] && $has[9] && $has[10] && $has[11] && $has[12]) {
-            return [true, "Ace"];
+            return [true, [$has[8] , $has[9] , $has[10] , $has[11] , $has[12]]];
         } elseif ($has[7] && $has[8] && $has[9] && $has[10] && $has[11]) {
-            return [true, "King"];        
+        return [true, [$has[7] , $has[8] , $has[9] , $has[10] , $has[11]]];        
         } elseif ($has[6] && $has[7] && $has[8] && $has[9] && $has[10]) {
-            return [true, "Queen"]; 
+            return [true, [$has[6] , $has[7] , $has[8] , $has[9] , $has[10]]]; 
         } elseif ($has[5] && $has[6] && $has[7] && $has[8] && $has[9]) {
-            return [true, "Jack"]; 
+            return [true, [$has[5] , $has[6] , $has[7] , $has[8] , $has[9]]]; 
         }  elseif ($has[4] && $has[5] && $has[6] && $has[7] && $has[8]) {
-            return [true, "Ten"]; 
+            return [true, [$has[4] , $has[5] , $has[6] , $has[7] , $has[8]]]; 
         }  elseif ($has[3] && $has[4] && $has[5] && $has[6] && $has[7]) {
-            return [true, "Nine"]; 
+            return [true, [$has[3] , $has[4] , $has[5] , $has[6] , $has[7]]]; 
         } elseif ($has[2] && $has[3] && $has[4] && $has[5] && $has[6]) {
-            return [true, "Eight"]; 
+            return [true, [$has[2] , $has[3] , $has[4] , $has[5] , $has[6]]]; 
         } elseif ($has[1] && $has[2] && $has[3] && $has[4] && $has[5]) {
-            return [true, "Seven"]; 
+            return [true, [$has[1] , $has[2] , $has[3] , $has[4] , $has[5]]]; 
         } elseif ($has[0] && $has[1] && $has[2] && $has[3] && $has[4]) {
-            return [true, "Six"]; 
+            return [true, [$has[0] , $has[1] , $has[2] , $has[3] , $has[4]]]; 
         } elseif ($has[12] && $has[0] && $has[1] && $has[2] && $has[3]) {
-            return [true, "Five"]; 
+            return [true, [$has[12] , $has[0] , $has[1] , $has[2] , $has[3]]]; 
         }
         return [false, "None"]; 
         
@@ -191,13 +192,7 @@ class Table {
             $match_info = $this->sort_matches($hand); 
             $straight_info =$this->sort_straights($hand); 
             $this->best_hand_for_player[$pv] = $this->find_best_hand($hand, $suit_info, $straight_info, $match_info); 
-            
-            echo "<div> Player" . $pv ." --- <p>straight_info: ". json_encode($straight_info) . "</p><br/>"; 
-            echo "Suit Info: <br/>"; 
-            foreach ($suit_info as $sinfo){
-                echo json_encode($sinfo) . " <br/>"; 
-            }
-            echo "<p> Match Info: ". json_encode($match_info) . "</p> Player" . $pv++ ."---  <br/></div><br/>";
+                     
         } 
     }
     
@@ -208,12 +203,7 @@ class Table {
         }
         $is_four_of_a_kind = $this->detect_four_of_a_kind($match_info); 
         if ($is_four_of_a_kind){
-            foreach($match_info as $key=>$value){
-                if ($value > 3){
-                    return ['four-of-a-kind', $key]; 
-                }
-            }
-        
+            return ['four-of-a-kind', $match_info['quads']];          
         }
         $is_full_house = $this->detect_full_house($match_info); 
         if ($is_full_house)
@@ -243,8 +233,8 @@ class Table {
         return [false]; 
     }
     
-    function detect_four_of_a_kind($matches){        
-        return in_array(4,$matches); 
+    function detect_four_of_a_kind($matches){  
+        return (count($matches['quads']) > 0); 
     }
     
     function detect_full_house($matches){
@@ -283,18 +273,19 @@ class API extends CI_Controller {
                  echo "<p>". json_encode($table) . "<p/>"; 
                   
                  
-                 $hand = [new Card('Ten', 'spades' , 8), 
+                 $hand = [new Card('Ace', 'diamonds' , 12), 
                      new Card('Ten', 'diamonds' , 8), 
                      new Card('Queen', 'diamonds' , 10), 
-                     new Card('Ace', 'clubs' , 12), 
+                     new Card('King', 'diamonds' , 11), 
                      new Card( 'Ace', 'spades' , 12), 
-                     new Card('Eight', 'diamonds' , 6), 
-                     new Card('Ace', 'hearts' , 12) ]; 
+                     new Card('Ten', 'clubs' , 8), 
+                     new Card('Jack', 'diamonds' , 9) ]; 
                 $suit_info = $table->sort_by_suits($hand); 
                 $straight_info = $table->sort_straights($hand);  
-                $match_info = $table->sort_matches($hand);                  
-                 
+                $match_info = $table->sort_matches($hand);             
+                
                  echo json_encode($table->find_best_hand($hand, $suit_info, $straight_info, $match_info)); 
+                 
             } 
     }
 }
