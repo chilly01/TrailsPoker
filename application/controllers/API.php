@@ -109,6 +109,7 @@ class Table {
         $known = []; 
         $temp = [];        
         $result = [
+            "single"=> [],
             "pairs" => [], 
             "trips" => [],
             "quads" => []
@@ -128,9 +129,11 @@ class Table {
                 }
             }
             $cc++;             
-            if ($paired > 1){
                 $known[$card->name]=$paired; 
                 switch ($paired){
+                    case 1: 
+                        $result['single'][] = $temp; 
+                        break; 
                     case 2:
                         $result['pairs'][] = $temp;  
                         break; 
@@ -144,7 +147,6 @@ class Table {
                         break; 
                  }                             
                 
-            }
             $paired = 1; 
             $temp = []; 
         }
@@ -193,7 +195,7 @@ class Table {
             $suit_info = $this->sort_by_suits($hand); 
             $match_info = $this->sort_matches($hand); 
             $straight_info =$this->sort_straights($hand); 
-            $this->best_hand_for_player[$pv] = $this->find_best_hand($hand, $suit_info, $straight_info, $match_info);                      
+            $this->best_hand_for_player['player_'.$pv++] = $this->find_best_hand($hand, $suit_info, $straight_info, $match_info);                      
         } 
     }
     
@@ -202,35 +204,45 @@ class Table {
         if ($is_straight_flush){
             return ['straight-flush', $is_straight_flush]; 
         }
-        $is_four_of_a_kind = $this->detect_four_of_a_kind($match_info); 
+        $is_four_of_a_kind = $this->detect_four_of_a_kind($match_info, $hand); 
         if ($is_four_of_a_kind){
-            return ['four-of-a-kind', $match_info['quads']];          
+            return ['four-of-a-kind', $is_four_of_a_kind];          
         }
         $is_full_house = $this->detect_full_house($match_info); 
         if ($is_full_house)
         {
             return ['full-house',$is_full_house]; // value of the triple , // value of the pair ]
         }
-        
-        
+        $is_flush = $this->detect_flush($suit_info); 
+        if ($is_flush){
+            return ['flush', $is_flush]; 
+        }
         
         return ['not done', $hand]; 
     }
     
     function detect_straight_flush($hand_by_suits){
-        $suit_counter = 0; 
         foreach ($hand_by_suits as $suit){
             if (count($suit)>4){
                 $value = $this->sort_straights($suit);
                 return $value; 
             }
-            $suit_counter++; 
         }
         return false; 
     }
     
-    function detect_four_of_a_kind($matches){  
-        return (count($matches['quads']) > 0); 
+    function detect_four_of_a_kind($matches, $hand){  
+        if  (count($matches['quads']) > 0){
+            $quads = $matches['quads'][0]; 
+            $value = $quads[0]->value; 
+                    foreach ($hand as $card){
+                       if ($value != $card->value){
+                           $quads[] = $card; 
+                           return $quads; 
+                       } 
+                    }
+        } 
+        return false; 
     }
     
     function detect_full_house($matches){ 
@@ -249,7 +261,7 @@ class Table {
     function detect_flush($hand_by_suits){
         foreach ($hand_by_suits as $suit){
             if (count($suit)>4){
-                return true;  
+                return [$suit[0],$suit[1],$suit[2],$suit[3],$suit[4]];  
             }
         }
         return false; 
@@ -286,12 +298,15 @@ class API extends CI_Controller {
                 $ace_of_spades = new Card('Ace', 'spades' , 12); 
                 $king_of_spades = new Card('King', 'spades' , 11); 
                 $queen_of_spades = new Card('Queen', 'spades' , 10); 
+                $four_of_spades = new Card('Four', 'spades', 2); 
+                $three_of_spades = new Card('Three', 'spades', 1); 
+                $two_of_spades = new Card('Two', 'spades', 0); 
                 
                 $ace_of_hearts = new Card('Ace', 'hearts' , 12);            
                 $king_of_hearts = new Card('King', 'hearts' , 11); 
                 
                 $ace_of_clubs = new Card('Ace', 'clubs' , 12); 
-                $two_of_clubs = new Card('Two', 'clubs' , 12); 
+                $two_of_clubs = new Card('Two', 'clubs' , 0); 
                 
                  
                 $straight_flush = [$ace_of_diamonds, $king_of_diamonds, $queen_of_diamonds, 
@@ -307,9 +322,16 @@ class API extends CI_Controller {
                     $king_of_hearts, $king_of_diamonds, $queen_of_spades, $queen_of_diamonds]; 
                 
                 $full_house_c = [$ace_of_clubs, $ace_of_diamonds, $ace_of_hearts, 
-                    $king_of_hearts, $king_of_diamonds, $jack_of_diamonds, $two_of_clubs]; 
+                    $king_of_hearts, $king_of_diamonds, $jack_of_diamonds, $four_of_spades]; 
                 
-                $test_hands = [$straight_flush, $four_of_a_kind, $full_house_a, $full_house_b, $full_house_c]; 
+                $flush = [$ace_of_diamonds, $king_of_diamonds, $jack_of_diamonds, 
+                    $two_of_clubs, $nine_of_diamonds,  $eight_of_diamonds, $ten_of_diamonds]; 
+                
+                $flusha = [$ace_of_spades, $king_of_spades, $queen_of_spades, 
+                    $two_of_spades, $three_of_spades,  $eight_of_diamonds, $ten_of_diamonds]; 
+                
+                $test_hands = [$straight_flush, $four_of_a_kind, $full_house_a,
+                    $full_house_b, $full_house_c, $flush, $flusha ]; 
                  
                 foreach ($test_hands as $hand){
                     usort($hand, array('Card', 'is_bigger'));
