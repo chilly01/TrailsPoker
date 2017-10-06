@@ -84,6 +84,9 @@ class PokerTest {
                     $match_info1 = $table->sort_matches($hand); 
                     echo  "<p>". json_encode($table->find_best_hand($hand, $suit_info1, $straight_info1, $match_info1)). "</p>"; 
                 }
+                
+               echo  "<p>". json_encode(new Hand('player_0', $straight_flush)). "</p>"; 
+               
            
     }
 }

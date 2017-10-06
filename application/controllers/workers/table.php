@@ -189,6 +189,7 @@ class Table {
     function score_hands(){
         $pv = 0; 
         foreach ($this->player as $player_hand){ 
+            
             $hand = array_merge($this->community, $player_hand);
             usort($hand, array('Card', 'is_bigger')); 
             $suit_info = $this->sort_by_suits($hand); 
@@ -321,5 +322,61 @@ class Table {
     
 }
    
-
-
+class Hand {
+    public $name; 
+    public $hand;
+    public $best_hand; 
+    public $value; 
+    public $score; 
+    
+    private $suit_info; 
+    private $match_info; 
+    private $straight_info; 
+    
+    function __construct($name, $array_of_cards) {
+        $this->name = $name; 
+        
+        usort($array_of_cards, array('Card', 'is_bigger')); 
+        $this->hand = $array_of_cards; 
+    }
+    
+    function process(){
+        $this->suit_info = $this->find_suits($this->hand); 
+        $this->match_info = $this->find_pairs($this->hand); 
+        $this->straight_info = $this->find_straight($this->hand);
+        $this->score = $this->score_hand(); 
+    }
+    
+   
+    function find_suits($hand){
+        $spades = []; 
+        $hearts = []; 
+        $diamonds = []; 
+        $clubs = []; 
+        
+        foreach ($hand as $card){
+            switch ($card->suit){
+                case "spades":
+                    $spades[]=$card;
+                    break; 
+                case "hearts":
+                    $hearts[]=$card;
+                    break;  
+                case "diamonds":
+                    $diamonds[]=$card;
+                    break;  
+                case "clubs":
+                    $clubs[]=$card;
+                    break;  
+            }
+        }
+     }
+     
+    function find_pairs($hand){
+        return $hand; 
+    }
+    
+    function find_straight($hand){
+        return $hand; 
+    }
+}
