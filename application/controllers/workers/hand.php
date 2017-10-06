@@ -5,7 +5,7 @@ class Hand {
     public $name; 
     private $hand;
     public $hand_name; 
-    private $best_hand; 
+    public $best_hand; 
     public $value; 
     public $score; 
     
@@ -15,7 +15,6 @@ class Hand {
     
     function __construct($name, $array_of_cards) {
         $this->name = $name; 
-        
         usort($array_of_cards, array('Card', 'is_bigger')); 
         $this->hand = $array_of_cards; 
         $this->process(); 
@@ -289,9 +288,21 @@ class Hand {
     function detect_two_pair(){ 
         
         if (count($this->match_info['pairs']) > 1){     
-            $this->value = [ $this->match_info['pairs'][0][0]->value, 
-                $this->match_info['pairs'][1][0]->value, 
-                $this->match_info['single'][0][0]->value ]; 
+            
+            $cardvalue1 = $this->match_info['pairs'][0][0]->value; 
+            $cardvalue2 = $this->match_info['pairs'][1][0]->value; 
+            
+            foreach ($this->hand as $card){
+                if ($card->value != $cardvalue1 && $card->value != $cardvalue2){
+                    $this->value = [$cardvalue1, $cardvalue2, $card->value];
+                 return array_merge($this->match_info['pairs'][0], 
+                    $this->match_info['pairs'][1], 
+                    [$card]);      
+                }
+            }
+            
+            
+           
             
             return array_merge($this->match_info['pairs'][0], 
                     $this->match_info['pairs'][1], 
