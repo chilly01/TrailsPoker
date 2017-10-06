@@ -77,22 +77,17 @@ class PokerTest {
                     $full_house_b, $full_house_c, $flush, $flusha, $straight_a, 
                     $straight_b, $trips, $two_pair_a, $pair, $high_card ]; 
                  
+                $hnd_arr = [];
+                $val = 0; 
                 foreach ($test_hands as $hand){
                     usort($hand, array('Card', 'is_bigger'));
-                    $suit_info1 = $table->sort_by_suits($hand); 
-                    $straight_info1 = $table->sort_straights($hand);  
-                    $match_info1 = $table->sort_matches($hand); 
-                    echo  "<p>". json_encode($table->find_best_hand($hand, $suit_info1, $straight_info1, $match_info1)). "</p>"; 
+                    $hnd_arr[] =new Hand(('test'.$val++) , $hand); 
+                    // echo  "<p>". json_encode($table->find_best_hand($hand, $suit_info1, $straight_info1, $match_info1)). "</p>"; 
                 }
+               echo  "<p>". json_encode($hnd_arr). "</p>"; 
                 
-               echo  "<p>". json_encode(new Hand('player_0', $straight_flush)). "</p>"; 
                
            
     }
 }
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
