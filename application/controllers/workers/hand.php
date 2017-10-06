@@ -313,14 +313,14 @@ class Hand {
                     }
                     break; 
                 case 1: 
-                    if ($a->value[0] == $b->value[0]){
+                    if ($a->value[0] != $b->value[0]){                        
+                       return ($a->value[0] < $b->value[0]);
+                    }else{
                         for($y=1; $y<4; $y++){
                             if ($a->value[$y] != $b->value[$y]){
                                 return ($a->value[$y] < $b->value[$y]);
                             }
                         }
-                    }else {
-                       return ($a->value[0] < $b->value[0]); 
                     }
                     break; 
                 case 2:
