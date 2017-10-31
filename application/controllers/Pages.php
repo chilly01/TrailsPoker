@@ -1,5 +1,8 @@
 <?php
 
+
+include_once "workers/table.php";
+
 class Pages extends CI_Controller {
 
     public function index($page = 'null') {// Index page is default.. pulls what ever page that is defined in views/pages        
@@ -9,6 +12,13 @@ class Pages extends CI_Controller {
         $data = $this->get_home_data();          
         $this->load->view('templates/header', $data);
         $this->load->view('pages/' . $action, $data);
+        $this->load->view('templates/footer', $data);
+    }
+    
+    public function poker($players = 2){
+        $data['poker_table'] = new Table($players); 
+        $this->load->view('templates/header', $data);
+        $this->load->view('games/poker', $data);
         $this->load->view('templates/footer', $data);
     }
 

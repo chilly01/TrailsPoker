@@ -368,7 +368,7 @@ class Hand {
                         return ($a->value[0] < $b->value[0]);
                     } 
                     if ($a->value[1] != $b->value[1]){
-                    return ($a->value[1] < $b->value[1]);
+                        return ($a->value[1] < $b->value[1]);
                     } 
                 case 8:
                     return ($a->value[0] < $b->value[0]);

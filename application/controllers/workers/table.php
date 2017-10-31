@@ -5,8 +5,8 @@ include_once 'hand.php';
 class Table {
    
     public $player; // array of array of 2 cards
-    public $best_hand_for_player; // array of hand rank and value per player
-    public $winner_list = []; 
+    public $best_hand_for_player = []; // array of hand rank and value per player
+    public $winner = []; 
     private $player_count = 0; 
     
     private $community; 
@@ -64,13 +64,14 @@ class Table {
         $pv = 0; 
         foreach ($this->player as $player_hand){             
             $hand = array_merge($this->community, $player_hand);
-            $xxx = new Hand(('player_'.$pv) , $hand); 
-            $this->best_hand_for_player['player_'.$pv++] = $xxx;
+            $name = 'player_'.$pv++; 
+            $this->best_hand_for_player[$name] = new Hand($name, $hand);             
         } 
-        usort($this->best_hand_for_player, array('Hand', 'comp'));
-        $rank = count($this->best_hand_for_player); 
-        foreach ($this->best_hand_for_player as $player){
-            $this->winner[] = [$player->name, $rank--];  
+        $temp = $this->best_hand_for_player; 
+        usort($temp, array('Hand', 'comp'));
+        $rank = 1; 
+        foreach ($temp as $player){
+            $this->winner[$player->name] = $rank++;  
         }
     }
 }
