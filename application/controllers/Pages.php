@@ -16,6 +16,10 @@ class Pages extends CI_Controller {
     }
     
     public function poker($players = 2){
+        if (!is_numeric($players) || 1 > $players || $players > 12){
+            $players = 2; 
+        }      
+        
         $data['poker_table'] = new Table($players); 
         $this->load->view('templates/header', $data);
         $this->load->view('games/poker', $data);

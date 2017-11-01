@@ -1,14 +1,27 @@
 <div>
     <h1 class="h1">Poker Page</h1>
 </div>
-<div class="bold">
-    <div><?php foreach ($poker_table->player as $key => $playerhand){ ?>
-        <h3><?= $key . " Place: " . $poker_table->winner[$key]; ?></h3>
-        <p><?= json_encode($playerhand); ?></p>
-        <p><?= $poker_table->best_hand_for_player[$key]->hand_name ." :: " 
-                . json_encode($poker_table->best_hand_for_player[$key]->value); ?></p>
-        <p><?= json_encode($poker_table->best_hand_for_player[$key]->best_hand); ?></p> 
-         <?php }?> </div>
+
+<div class>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <th>Position</th>
+        <th>Place</th>
+        <th>Poker Rank</th>
+        <th>Hand</th>
+    </thead><tbody>
+        <?php $position = 0; 
+        foreach ($poker_table->player as $key => $val){ ?>
+        <tr>
+            <td><?= $position++; ?></td>
+            <td><?= $poker_table->winner[$key]; ?></td>
+            <td><?= $poker_table->best_hand_for_player[$key]->hand_name; ?></td>
+            <td><?= json_encode($val); ?></td>
+        </tr>
+       <?php }?>
+    </tbody>
+    </table>
+    
 </div>
 <br/>
 <h3>Flop</h3>
