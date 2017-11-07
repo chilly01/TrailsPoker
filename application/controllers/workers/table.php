@@ -76,6 +76,7 @@ class Table {
             $cycle++; 
             if ($cur_score != $player->value){ 
                 $rank = $cycle; 
+                $cur_score = $player->value; 
             }
             $this->winner[$player->name] = $rank;            
         }

@@ -11,34 +11,59 @@
         <th>Hand</th>
         <th>Best Hand</th>
     </thead><tbody>
-        <?php $position = 0; 
-        foreach ($poker_table->player as $key => $val){ ?>
-        <tr <?= ($poker_table->winner[$key] == 1) ? 'class="success"' : "";  ?> >
-            <td><?= $position++; ?></td>
+        <?php $seat_position = 0; 
+        foreach ($poker_table->player as $key => $val){
+            $class = ""; 
+            if ($poker_table->winner[$key] === 1) {
+                $class = 'class="success"'; 
+            } elseif ($poker_table->winner[$key] === 2){
+              $class = 'class="warning"';   
+            }elseif ($poker_table->winner[$key] === 3){ 
+                $class = 'class="danger"';
+            }
+            ?>
+        <tr <?= $class; ?> >
+            <td><?= $seat_position++; ?></td>
             <td><?= $poker_table->winner[$key]; ?></td>
             <td><?= $poker_table->best_hand_for_player[$key]->hand_name; ?></td>
             <td><?= $val[0]->display() . " and " .$val[1]->display(); ?></td>
-            <td><?php foreach($poker_table->best_hand_for_player[$key]->best_hand as $b_card){
-                echo $b_card->display() . " , "; 
+            <td><?php 
+            $best_hand = ""; 
+            foreach($poker_table->best_hand_for_player[$key]->best_hand as $b_card){
+                $best_hand .=  $b_card->display() . " , "; 
             } ?>
+            <?= chop($best_hand, ", "); ?>                 
         </tr>
-       <?php }?>
+      <?php } ?>
     </tbody>
     </table>
     
 </div>
 <br/>
-<h3>Flop</h3>
-<div><?php foreach ($poker_table->flop as $card) {?>
-    <p><?=  $card->display(); ?></p> 
-<?php } ?>
-</div>
-<br/>
-<h3>Turn</h3>
-<p><?= $poker_table->turn->display(); ?></p>
-<br/>
-<h3>River</h3>
-<p><?= $poker_table->river->display(); ?></p>
+
+<table  class="table table-bordered table-striped" style="padding: 10px">
+    <thead>
+        <tr>
+            <th>Flop</th>
+            <th>Turn</th>
+            <th>River</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="info">
+            <td><?php 
+                    $flop = ""; 
+                    foreach ($poker_table->flop as $card) {
+                        $flop .= $card->display() . " , ";     
+                    }
+                echo chop($flop, ", "); ?> 
+            </td>
+            <td><?= $poker_table->turn->display(); ?></td>
+            <td><?= $poker_table->river->display(); ?></td>
+        </tr>
+    </tbody>
+</table>
+
 <div class="result bold">
 
 </div>
