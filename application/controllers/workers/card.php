@@ -18,4 +18,8 @@ class Card {
         return ($a->value < $b->value); 
     }
     
+    public function display(){
+        return $this->name . " of " .$this->suit; 
+    }
+    
 } 

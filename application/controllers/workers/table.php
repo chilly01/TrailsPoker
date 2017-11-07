@@ -69,9 +69,15 @@ class Table {
         } 
         $temp = $this->best_hand_for_player; 
         usort($temp, array('Hand', 'comp'));
+        $cur_score = $temp[0]->value; 
+        $cycle = 0; 
         $rank = 1; 
         foreach ($temp as $player){
-            $this->winner[$player->name] = $rank++;  
+            $cycle++; 
+            if ($cur_score != $player->value){ 
+                $rank = $cycle; 
+            }
+            $this->winner[$player->name] = $rank;            
         }
     }
 }

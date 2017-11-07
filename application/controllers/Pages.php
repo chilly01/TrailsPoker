@@ -16,7 +16,7 @@ class Pages extends CI_Controller {
     }
     
     public function poker($players = 2){
-        if (!is_numeric($players) || 1 > $players || $players > 12){
+        if (!is_numeric($players) || 2 > $players || $players > 12){
             $players = 2; 
         }      
         
