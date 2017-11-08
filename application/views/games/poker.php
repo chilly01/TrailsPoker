@@ -14,17 +14,17 @@
         <?php $seat_position = 0; 
         foreach ($poker_table->player as $key => $val){
             $class = ""; 
-            if ($poker_table->winner[$key] === 1) {
+            if ($poker_table->place[$key] === 1) {
                 $class = 'class="success"'; 
-            } elseif ($poker_table->winner[$key] === 2){
+            } elseif ($poker_table->place[$key] === 2){
               $class = 'class="warning"';   
-            }elseif ($poker_table->winner[$key] === 3){ 
+            }elseif ($poker_table->place[$key] === 3){ 
                 $class = 'class="danger"';
             }
             ?>
         <tr <?= $class; ?> >
             <td><?= $seat_position++; ?></td>
-            <td><?= $poker_table->winner[$key]; ?></td>
+            <td><?= $poker_table->place[$key]; ?></td>
             <td><?= $poker_table->best_hand_for_player[$key]->hand_name; ?></td>
             <td><?= $val[0]->display() . " and " .$val[1]->display(); ?></td>
             <td><?php 

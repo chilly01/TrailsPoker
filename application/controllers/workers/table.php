@@ -6,7 +6,7 @@ class Table {
    
     public $player; // array of array of 2 cards
     public $best_hand_for_player = []; // array of hand rank and value per player
-    public $winner = []; 
+    public $place = []; 
     private $player_count = 0; 
     
     private $community; 
@@ -78,7 +78,7 @@ class Table {
                 $rank = $cycle; 
                 $cur_score = $player->value; 
             }
-            $this->winner[$player->name] = $rank;            
+            $this->place[$player->name] = $rank;            
         }
     }
 }
