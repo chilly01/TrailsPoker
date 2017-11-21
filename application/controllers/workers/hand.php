@@ -103,37 +103,22 @@ class Hand {
     }
     
     function find_straight($hand){
-               $has = []; 
+        $has = []; 
         for($x = 0; $x < 13; $x++){
             $has[$x]=false; 
         }
         foreach($hand as $card){
-            $has[$card->value] = $has[$card->value] ? $has[$card->value]  : $card; 
-        }
-               
-        if ($has[12] && $has[11] && $has[10] && $has[9] && $has[8]) {
-            return [$has[12],$has[11],$has[10],$has[9],$has[8]];
-        } elseif ($has[11] && $has[10] && $has[9] && $has[8] && $has[7]) {
-            return [$has[11] , $has[10] , $has[9] , $has[8] , $has[7]];        
-        } elseif ($has[10] && $has[9] && $has[8] && $has[7] && $has[6]) {
-            return  [$has[10] , $has[9] , $has[8] , $has[7] , $has[6]]; 
-        } elseif ($has[9] && $has[8] && $has[7] && $has[6] && $has[5]) {
-            return  [$has[9] , $has[8] , $has[7] , $has[6] , $has[5]]; 
-        }  elseif ($has[8] && $has[7] && $has[6] && $has[5] && $has[4]) {
-            return  [$has[8] , $has[7] , $has[6] , $has[5] , $has[4]]; 
-        }  elseif ($has[7] && $has[6] && $has[5] && $has[4] && $has[3]) {
-            return  [$has[7] , $has[6] , $has[5] , $has[4] , $has[3]]; 
-        } elseif ($has[6] && $has[5] && $has[4] && $has[3] && $has[2]) {
-            return  [$has[6] , $has[5] , $has[4] , $has[3] , $has[2]]; 
-        } elseif ($has[5] && $has[4] && $has[3] && $has[2] && $has[1]) {
-            return  [$has[5] , $has[4] , $has[3] , $has[2] , $has[1]]; 
-        } elseif ($has[4] && $has[3] && $has[2] && $has[1] && $has[0]) {
-            return  [$has[4] , $has[3] , $has[2] , $has[1] , $has[0]]; 
-        } elseif ($has[3] && $has[2] && $has[1] && $has[0] && $has[12]) {
+            $has[$card->value] = $has[$card->value] ? $has[$card->value]  : $card; // keep the highest suit value
+        }            
+        for($y = 12; $y > 4; $y--){
+            if ($has[$y] && $has[$y-1] && $has[$y-2] && $has[$y-3] && $has[$y-4]){
+                return  [$has[$y] ,$has[$y-1] , $has[$y-2] , $has[$y-3] , $has[$y-4]];                
+            }
+        }        
+        if ($has[3] && $has[2] && $has[1] && $has[0] && $has[12]) {
             return  [$has[3] , $has[2] , $has[1] , $has[0] , $has[12]]; 
         }
-        return false; 
-        
+        return false;
     }
     
     function find_best_hand(){
