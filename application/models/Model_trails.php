@@ -57,8 +57,8 @@ class Model_trails extends CI_Model{
      }
      
     private function ip_details($ip) {
-        $json = file_get_contents("http://ipinfo.io/{$ip}/geo");
-        $details = json_decode($json); // HERE!!!
+        $json = []; // file_get_contents("http://ipinfo.io/{$ip}/geo");
+        $details = []; // HERE!!!
         return $details;
     }
 } 
