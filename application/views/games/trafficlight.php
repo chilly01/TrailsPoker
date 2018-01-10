@@ -49,6 +49,6 @@ function reloadLight(){
     <li>Your controller will be called once per second.</li>
 </ul>
     <div class="lightoutput"> 
-        <p>There is stuff here... just work at it...</p>
+        <p>There is stuff here... just wait for it...</p>
     </div> 
 </div>
