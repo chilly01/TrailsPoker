@@ -26,13 +26,17 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8 text-left">
             <div id="home">
-                <div class="ch_msg">
+                <div class="ch_msg" class="col-sm-6">
                     <img src="<?= $this->config->item('image_url') . 'assets/images/'; ?>lucky_small.png"/>
-
+                    
                     <h1>Cody Hillyard</h1>
-                    <p>Born and raised in Logan Utah.  Now an awesome programmer looking for work.</p>
+                    <div id="about_body">
+                    </p>I was born and raised in Logan Utah.  In the summer between the third and fourth grade, I was introduced to a Commadore 64.  I was allowed to program that device by using a new language called Basic. I wrote my programs that counted and displayed funny jokes to a cassette tape drive.  From that time on I was hooked on computers.  Below is a few articles and programs that I've worked on and up keep.</p>
+
+<h3>Please Enjoy!</h3>
+</div>
                 </div>
-                <div class="ch_act">
+                <div class="ch_act col-sm-2">
                     <div class='list-group'>
                         <a href='https://www.linkedin.com/in/cody-hillyard' target="_blank" class='list-group-item'><i class="fa fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a>
                         <a href='https://www.facebook.com/cody.hillyard' target="_blank" class='list-group-item'><i class="fa fa-facebook-square" aria-hidden="true"></i> Facebook</a>
