@@ -38,7 +38,16 @@ function reloadLight(){
 
 </script>
 <div>
-    
+<h1>I was given this task to do</h1> 
+
+<p>Write code for a controller for a stop light at a T-Intersection according to the following rules. </p>
+<ul>
+    <li>The straight part of the intersection runs East-West and receives the heaviest traffic and should be green most often.</li> 
+    <li>The intersecting road runs North and only receives light traffic and therefore contains a single sensor to inform the light of the presence of a car. If the sensor is activated for more than 10 seconds the light for the East/Westbound commuters should turn yellow for 3 seconds, then red. 2 seconds later the light for Northbound commuters should turn green. </li>
+    <li>If the sensor goes inactive for more than 5 seconds the light will then cycle back to be green for East/West bound commuters. </li>
+    <li>Additionally, the Northbound light will never be green for longer than 40 seconds and the East/Westbound lights will never be green for less than 30s.</li>
+    <li>Your controller will be called once per second.</li>
+</ul>
     <div class="lightoutput"> 
         <p>There is stuff here... just work at it...</p>
     </div> 
