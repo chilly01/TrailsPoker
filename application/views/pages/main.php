@@ -103,8 +103,7 @@
   -->
             <div id="resume" >
                 <div class="ch_msg">
-                    <h1> Cody Hillyard</h1>
-                    <p>This is a test of the programming and web site building skills you have</p>
+                    <h1> Cody Hillyard</h1>                  
                     <a href="https://docs.google.com/document/d/e/2PACX-1vTyGPxCksl_-Y4HyscZtgJQXG7QNbkMIZa_2NXm6-PoFTpBS31tOP2NePga23knvfp116G8CZKQQGxe/pub">Resume Link</a>
                 </div>                   
                 <div class="ch_act">
@@ -116,7 +115,7 @@
             <div id="blog" >
                 <div class="ch_msg">
                     <h1> Cody Hillyard</h1>
-                    <p>This is a test of the programming and web site building skills you have</p>
+                    <p>Comming soon:: Article section with blog entries.</p>
                 </div>
                 <div class="ch_act">
 
@@ -127,8 +126,8 @@
                 <div class="ch_msg">
 
                     <h1 > Cody Hillyard</h1>
-                    <p>Tic Tac Toe in ReactJS</p>
-                    <br/>                                
+                    <p style='color: blue;'> Here are a few projects that I've added to the site </p>
+                    <p>Tic Tac Toe in ReactJS</p>        
                     <div id="react_box"></div>
                     <script src="https://unpkg.com/react@15/dist/react.js"></script>
                     <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
@@ -137,8 +136,9 @@
 
                 </div>
                 <div class="ch_act">
-                    <a href="<?= $this->config->item('image_url') . 'assets/' ?>react/index.js">React Code</a>
-                    <a href="<?= site_url('pages/poker/8'); ?>" > Eight Handed Poker Hand </a>
+                    <ul>
+                        <li>  <a href="<?= $this->config->item('image_url') . 'assets/' ?>react/index.js">React Code</a></li>
+                        <li><a href="<?= site_url('pages/poker/8'); ?>" > Eight Handed Poker Hand </a></li>
 
 
                 </div>
