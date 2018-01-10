@@ -101,6 +101,7 @@
                 <div class="ch_msg">
                     <h1> Cody Hillyard</h1>
                     <p>This is a test of the programming and web site building skills you have</p>
+                    <a href="https://docs.google.com/document/d/e/2PACX-1vTyGPxCksl_-Y4HyscZtgJQXG7QNbkMIZa_2NXm6-PoFTpBS31tOP2NePga23knvfp116G8CZKQQGxe/pub">Resume Link</a>
                 </div>                   
                 <div class="ch_act">
 
@@ -133,6 +134,7 @@
                 </div>
                 <div class="ch_act">
                     <a href="<?= $this->config->item('image_url') . 'assets/' ?>react/index.js">React Code</a>
+                    <a href="<?= site_url('pages/poker/8'); ?>" > Eight Handed Poker Hand </a>
 
 
                 </div>
