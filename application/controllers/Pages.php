@@ -2,6 +2,7 @@
 
 
 include_once "workers/table.php";
+include_once "workers/trafficlight.php";
 
 class Pages extends CI_Controller {
 
@@ -12,6 +13,14 @@ class Pages extends CI_Controller {
         $data = $this->get_home_data();          
         $this->load->view('templates/header', $data);
         $this->load->view('pages/' . $action, $data);
+        $this->load->view('templates/footer', $data);
+    }
+    
+    public function trafficlight(){
+        
+        $data['trafficlight'] = new VoidTrafficLight();  
+        $this->load->view('templates/header', $data);
+        $this->load->view('games/trafficlight', $data);
         $this->load->view('templates/footer', $data);
     }
     
