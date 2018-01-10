@@ -30,7 +30,7 @@
                     <img src="<?= $this->config->item('image_url') . 'assets/images/'; ?>lucky_small.png"/>
 
                     <h1>Cody Hillyard</h1>
-                    <p>Born and raised in Logan Utah.</p>
+                    <p>Born and raised in Logan Utah.  Now an awesome programmer looking for work.</p>
                 </div>
                 <div class="ch_act">
                     <div class='list-group'>
