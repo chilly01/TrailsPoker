@@ -6,7 +6,7 @@ class PokerTest {
     public static function run(){
              echo "Invalid Player Count <br/><br/>"; 
                  
-                 $table = new Table(2); 
+                $table = new Table(2); 
                   
                  // cards for testing 
                 $ace_of_diamonds = new Card('Ace', 'diamonds' , 12); 
