@@ -1,4 +1,4 @@
-<em>&copy; 2017 codyhillyard.com</em>
+<em>&copy; 2018 codyhillyard.com</em>
 <a href="<?= site_url('pages/index/home') ?>">Poker Main Page</a>
 <a href="<?= site_url('pages/index/main') ?>">Developer Page</a>
 
