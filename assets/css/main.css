@@ -3,52 +3,52 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : Apr 12, 2017, 9:12:35 AM
     Author     : Cody Hillyard
 */
 
 body {
-      position: relative; 
+      position: relative;
   }
-  
+
   .ch_msg {
-      padding: 10px; 
-      float: left; 
-      width: 75%; 
+      padding: 10px;
+      float: left;
+      width: 75%;
   }
-  
+
   .ch_act {
-      padding: 10px; 
-      float: right; 
-      width: 25%; 
+      padding: 10px;
+      float: right;
+      width: 25%;
   }
-  
+
   #background_container {
     background-color: grey;
     background-position: center top;
     background-size: cover;
 
-      
+
   }
-  
+
 #image_header {
-    	height: 70px; 
+    	height: 70px;
 }
 #home {
     padding-top:50px;
     overflow: auto;
     color: black;
     background-color: #ffffcc;
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
     border-radius: 5px;}
 
 #resume {
     padding-top:50px;
     height:500px;
-    color: #fff; 
+    color: #fff;
     background-color: #673ab7;
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
     border-radius: 5px;}
 
 #store  {
@@ -56,15 +56,15 @@ body {
     height:500px;
     color: #fff;
     background-color: black;
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
     border-radius: 5px;}
 
 #projects {
     padding-top:50px;
     height:500px;
-    color: #fff; 
+    color: #fff;
     background-color: #ff9800;
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
     border-radius: 5px;}
 
 #blog {
