@@ -28,4 +28,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-workspace
 *.sublime-project
 /sessions/
+/application/sessions/
 /application/config/database.php
+/application/config/config.php

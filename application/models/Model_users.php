@@ -18,7 +18,8 @@ class Model_users extends CI_Model{
                 $this->session->user_name = $this->input->post('user_name'); 
                 $this->session->active = TRUE; 
                 return true; 
-            }             
+            }   
+            echo "user not found"; 
             return false; 
     }
 }
