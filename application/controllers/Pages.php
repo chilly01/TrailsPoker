@@ -114,7 +114,8 @@ class Pages extends CI_Controller {
     }
 
     private function is_active() {
-        if (!$this->session->active) {
+        echo json_encode($this->session); 
+        if (!$this->session->active) {            
             echo "<h1>inactive session</h1>";
             echo '<a href="' . site_url() . '">Main Page</a></br></br>';
             echo '<a href="' . site_url('pages/index/login') . '">Login Page</a>';
