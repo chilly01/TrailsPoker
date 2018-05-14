@@ -5,7 +5,6 @@ $config['base_url'] = 'http://localhost/';
 
 $config['image_url'] = 'http://localhost/';
 
-
 $config['index_page'] = 'index.php?';
 
 $config['uri_protocol']	= 'QUERY_STRING';

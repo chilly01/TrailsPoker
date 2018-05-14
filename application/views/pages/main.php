@@ -46,65 +46,10 @@
                     </div>
                 </div>
             </div>
-            <!--- 
-            <div id="store" >
-                <div class="ch_msg">
-                    <h1>Things I'm trying to sell</h1>
-                    <p>please browse through the items I have listed here and contact me if you want to buy any of them</p>
-                </div>
-                <div class="ch_act">
-                    <div id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="card">
-                            <div class="card-header" role="tab" id="headingOne">
-                                <h5 class="mb-0">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Collapsible Group Item #1
-                                    </a>
-                                </h5>
-                            </div>
-
-                            <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="card-block">
-                                    <p> this is my test </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" role="tab" id="headingTwo">
-                                <h5 class="mb-0">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Collapsible Group Item #2
-                                    </a>
-                                </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="card-block">
-                                    <p>Placeholder for ps_3 games</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" role="tab" id="headingThree">
-                                <h5 class="mb-0">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Collapsible Group Item #3
-                                    </a>
-                                </h5>
-                            </div>
-                            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="card-block">
-                                    <p>Placeholer for other things to sell</p> </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-  -->
             <div id="resume" >
                 <div class="ch_msg">
-                    <h1> Cody Hillyard</h1>                  
-                    <a href="https://docs.google.com/document/d/e/2PACX-1vTyGPxCksl_-Y4HyscZtgJQXG7QNbkMIZa_2NXm6-PoFTpBS31tOP2NePga23knvfp116G8CZKQQGxe/pub">Resume Link</a>
+                    <h1> Cody Hillyard</h1>   
+                      <a href="<?= $this->config->item('image_url') . 'assets/' ?>resume.pdf">Resume Link</a>
                 </div>                   
                 <div class="ch_act">
 
