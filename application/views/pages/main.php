@@ -49,7 +49,7 @@
             <div id="resume" >
                 <div class="ch_msg">
                     <h1> Cody Hillyard</h1>   
-                      <a href="<?= $this->config->item('image_url') . 'assets/' ?>resume.pdf">
+                      <a href="<?= $this->config->item('image_url') . 'assets/' ?>resume.pdf"  target="_blank" >
                           <img border="0" alt="Resume" src="<?= $this->config->item('image_url') . 'assets/' ?>images/resume_link.jpg">
                       </a>
                 </div>                   
