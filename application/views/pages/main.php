@@ -76,9 +76,12 @@
                     <p style='color: blue;'> Here are a few projects that I've added to the site </p>
                     <p>Tic Tac Toe in ReactJS</p>        
                     <div id="react_box"></div>
+                    <br />
+                    <div id="rps"></div>
                     <script src="https://unpkg.com/react@15/dist/react.js"></script>
                     <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
                     <script src="<?= $this->config->item('image_url') . 'assets/' ?>react/tictactoe.js"></script>
+                    <script src="<?= $this->config->item('image_url') . 'assets/' ?>react/rockpaperscissors.js"></script>
                     <link rel="stylesheet" href="<?= $this->config->item('image_url') . 'assets/' ?>react/index.css">
 
                 </div>

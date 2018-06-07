@@ -23,6 +23,9 @@ body {
       float: right;
       width: 25%;
   }
+  .rpsselect{
+      color: black; 
+  }
 
   #background_container {
     background-color: grey;
