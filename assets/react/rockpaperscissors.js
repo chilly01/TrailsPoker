@@ -17,24 +17,32 @@ var RPS = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (RPS.__proto__ || Object.getPrototypeOf(RPS)).call(this, props));
 
         _this.state = {
+            curChoice: 'rock',
             userChoice: ' ',
             cpuChoice: ' ',
             battleResult: " "
         };
 
         _this.handleChoice = _this.handleChoice.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
     _createClass(RPS, [{
         key: 'handleChoice',
         value: function handleChoice(e) {
+            this.setState({ curChoice: e.target.value });
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(e) {
             var myArray = ['rock', 'paper', 'scissors'];
             var rand = myArray[Math.floor(Math.random() * myArray.length)];
-            var usr = e.target.value;
+            var usr = this.state.curChoice;
             var cpu = rand;
             var battle = this.findWinner(usr, cpu);
             this.setState({ userChoice: usr, cpuChoice: cpu, battleResult: battle });
+            e.preventDefault();
         }
     }, {
         key: 'findWinner',
@@ -60,14 +68,14 @@ var RPS = function (_React$Component) {
                 null,
                 React.createElement(
                     'form',
-                    null,
+                    { onSubmit: this.handleSubmit },
                     React.createElement(
                         'label',
                         null,
                         'Select:',
                         React.createElement(
                             'select',
-                            { className: 'rpsselect', onChange: this.handleChoice },
+                            { className: 'rps_select', onChange: this.handleChoice },
                             React.createElement(
                                 'option',
                                 { value: 'rock' },
@@ -84,7 +92,9 @@ var RPS = function (_React$Component) {
                                 'Scissors'
                             )
                         )
-                    )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement('input', { className: 'rps_select', type: 'submit', value: 'Fight' })
                 ),
                 React.createElement(
                     'p',

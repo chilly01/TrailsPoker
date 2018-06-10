@@ -74,16 +74,18 @@
 
                     <h1 > Cody Hillyard</h1>
                     <p style='color: blue;'> Here are a few projects that I've added to the site </p>
-                    <p>Tic Tac Toe in ReactJS</p>        
-                    <div id="react_box"></div>
+                    <p>Tic Tac Toe in ReactJS</p>  
+                    <div style="color: black">
+                    <div id="ttt"></div>
                     <br />
                     <div id="rps"></div>
-                    <script src="https://unpkg.com/react@15/dist/react.js"></script>
-                    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
-                    <script src="<?= $this->config->item('image_url') . 'assets/' ?>react/tictactoe.js"></script>
-                    <script src="<?= $this->config->item('image_url') . 'assets/' ?>react/rockpaperscissors.js"></script>
-                    <link rel="stylesheet" href="<?= $this->config->item('image_url') . 'assets/' ?>react/index.css">
+                    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+                    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 
+                    <script src="<?= $this->config->item('image_url') . 'assets/' ?>react/ttt_prod.js"></script>
+                    <script src="<?= $this->config->item('image_url') . 'assets/' ?>react/rps_prod.js"></script>
+                    <link rel="stylesheet" href="<?= $this->config->item('image_url') . 'assets/' ?>react/index.css">
+                    </div>
                 </div>
                 <div class="ch_act">
                     <ul>
